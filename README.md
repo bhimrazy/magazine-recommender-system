@@ -6,6 +6,12 @@ Follow these commands to run the project.
 ## Setup
 
 ```shell
+    # download data
+    $ make data # it will download inside -> notebooks/data/
+
+```
+
+```shell
     #create a python environment
     $ python -m venv venv
     #activate environment
