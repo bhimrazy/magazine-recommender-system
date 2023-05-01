@@ -1,5 +1,6 @@
 import pickle
 import logging
+import numpy as np
 import pandas as pd
 from functools import lru_cache
 
@@ -32,10 +33,16 @@ with open('popular_magazines.pkl', 'rb') as f:
     logger.info('Successfully loaded popular magazines.')
 
 # loding cosine similarity dataframe from file
-with open('collaborative_cosine.pkl', 'rb') as f:
+with open('similarity_score.pkl', 'rb') as f:
     logger.info('Loading cosine score from file...')
-    scores = pickle.load(f)
+    similarity_score = pickle.load(f)
     logger.info('Successfully loaded cosine scores.')
+
+# loding cosine similarity dataframe from file
+with open('pivot_table.pkl', 'rb') as f:
+    logger.info('Loading pivot table from file...')
+    pivot_table = pickle.load(f)
+    logger.info('Successfully loaded pivot table.')
 
 
 @lru_cache(maxsize=None)
@@ -46,3 +53,23 @@ def get_popular_magazines():
 @lru_cache(maxsize=None)
 def get_magazines_ids():
     return magazines["magazine_id"].values
+
+
+def get_magazine_by_id(magazine_id):
+    return magazines[magazines['magazine_id'] == magazine_id].to_dict(orient='records')
+
+
+def get_magazine_by_ids(magazine_ids):
+    return magazines[magazines["magazine_id"].isin(magazine_ids)].to_dict(orient='records')
+
+
+def recommend(magazine_id):
+    # index fetch
+    index = np.where(pivot_table.index == magazine_id)[0][0]
+    # sorting on the basis of score
+    similar_item = sorted(list(enumerate(similarity_score[index])), key=lambda x: x[1], reverse=True)[1:6]
+    items = []
+    for i in similar_item:
+        items.append(pivot_table.index[i[0]])
+
+    return get_magazine_by_ids(items)
