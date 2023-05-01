@@ -25,10 +25,17 @@ def home(request: Request):
 
 
 @app.get("/{magazine_id}")
-def read_item(magazine_id: str):
+def read_item(magazine_id: str, request: Request):
     ids = utils.get_magazines_ids()
 
     if magazine_id in ids:
-        return {"magazine_id": magazine_id}
+        try:
+            magazine = utils.get_magazine_by_id(magazine_id)
+            recommended = utils.recommend(magazine_id)
+            return templates.TemplateResponse("magazine-view.html", {"request": request, "data": magazine[0], "recommended": recommended[:4]})
+        except Exception as e:
+            # print("Error", e)
+            utils.logger.error(e)
+        raise HTTPException(status_code=404, detail="Magazine not found")
     else:
         raise HTTPException(status_code=404, detail="Magazine not found")
