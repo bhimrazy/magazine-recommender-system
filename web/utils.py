@@ -45,7 +45,7 @@ with open('pivot_table.pkl', 'rb') as f:
     logger.info('Successfully loaded pivot table.')
 
 
-@lru_cache(maxsize=None)
+# @lru_cache(maxsize=None)
 def get_popular_magazines():
     return popular_magazines.sample(n=8).to_dict(orient='records')
 
