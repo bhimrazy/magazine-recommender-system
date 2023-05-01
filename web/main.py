@@ -20,7 +20,8 @@ async def http_exception_handler(request: Request, exc: HTTPException):
 @app.get("/")
 def home(request: Request):
     magazines = utils.get_popular_magazines()
-    # print(magazines[0])
+    magazines_by_cat = utils.get_magazine_by_cat()
+    print(magazines_by_cat)
     return templates.TemplateResponse("index.html", {"request": request, "data": magazines})
 
 

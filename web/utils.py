@@ -59,6 +59,12 @@ def get_magazine_by_id(magazine_id):
     return magazines[magazines['magazine_id'] == magazine_id].to_dict(orient='records')
 
 
+def get_magazine_by_cat():
+
+    print(magazines.columns)
+    return "magazine"
+
+
 def get_magazine_by_ids(magazine_ids):
     return magazines[magazines["magazine_id"].isin(magazine_ids)].to_dict(orient='records')
 
