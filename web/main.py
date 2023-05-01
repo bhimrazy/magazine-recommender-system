@@ -21,8 +21,7 @@ async def http_exception_handler(request: Request, exc: HTTPException):
 def home(request: Request):
     magazines = utils.get_popular_magazines()
     magazines_by_cat = utils.get_magazine_by_cat()
-    print(magazines_by_cat)
-    return templates.TemplateResponse("index.html", {"request": request, "data": magazines})
+    return templates.TemplateResponse("index.html", {"request": request, "data": magazines, "category": magazines_by_cat})
 
 
 @app.get("/{magazine_id}")
@@ -33,7 +32,7 @@ def read_item(magazine_id: str, request: Request):
         try:
             magazine = utils.get_magazine_by_id(magazine_id)
             recommended = utils.recommend(magazine_id)
-            return templates.TemplateResponse("magazine-view.html", {"request": request, "data": magazine[0], "recommended": recommended[:4]})
+            return templates.TemplateResponse("magazine-view.html", {"request": request, "data": magazine[0], "recommended": recommended})
         except Exception as e:
             # print("Error", e)
             utils.logger.error(e)

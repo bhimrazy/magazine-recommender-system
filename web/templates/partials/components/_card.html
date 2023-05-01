@@ -3,12 +3,13 @@
     <!-- <div class=" absolute bg-gray-50/0 group-hover:bg-gray-400/20 transition h-full w-full"></div> -->
     <div class="items-center flex flex-col w-full">
         <a href="/{{item['magazine_id']}}">
-            <img class="object-cover place-content-center rounded-xl" loading="lazy" height="500" width="370"
+            <img class="object-cover place-content-center rounded-xl" loading="lazy" height="370px" width="270px"
                 src="{{item['imageURLHighRes'][0]}}" />
         </a>
     </div>
     <div class="flex flex-row justify-between items-center pr-2">
         <span class="px-2 rounded-full border text-left hover:bg-orange-100 transition">{{item["brand"]}}</span>
+        {% if item["avg_ratings"] %}
         <span class="inline-flex items-center space-x-2">
             <svg class=" text-yellow-500 h-4 w-4 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                 fill="currentColor" class="w-6 h-6">
@@ -19,5 +20,6 @@
 
             {{ item["avg_ratings"]|round(1, 'floor') }}
         </span>
+        {% endif %}
     </div>
 </div>

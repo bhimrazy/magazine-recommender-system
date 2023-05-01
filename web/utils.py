@@ -59,23 +59,24 @@ def get_magazine_by_id(magazine_id):
     return magazines[magazines['magazine_id'] == magazine_id].to_dict(orient='records')
 
 
+@lru_cache(maxsize=None)
 def get_magazine_by_cat():
-
-    print(magazines.columns)
-    return "magazine"
+    data = []
+    cats = magazines["category"].value_counts()
+    for c in cats[cats > 10].index:
+        filtered_magazines = magazines[magazines["category"].isin([c])].sample(n=8).to_dict(orient='records')
+        data.append([" | ".join(c[1:]), filtered_magazines])
+    return data
 
 
 def get_magazine_by_ids(magazine_ids):
-    return magazines[magazines["magazine_id"].isin(magazine_ids)].to_dict(orient='records')
+    return magazines[magazines["magazine_id"].isin(magazine_ids)].to_dict(orient='records')[:8]
 
 
 def recommend(magazine_id):
     # index fetch
     index = np.where(pivot_table.index == magazine_id)[0][0]
     # sorting on the basis of score
-    similar_item = sorted(list(enumerate(similarity_score[index])), key=lambda x: x[1], reverse=True)[1:6]
-    items = []
-    for i in similar_item:
-        items.append(pivot_table.index[i[0]])
-
+    similar_item = sorted(list(enumerate(similarity_score[index])), key=lambda x: x[1], reverse=True)[1:15]
+    items = [pivot_table.index[i[0]] for i in similar_item]
     return get_magazine_by_ids(items)
