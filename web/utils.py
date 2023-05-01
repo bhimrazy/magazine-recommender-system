@@ -79,4 +79,5 @@ def recommend(magazine_id):
     # sorting on the basis of score
     similar_item = sorted(list(enumerate(similarity_score[index])), key=lambda x: x[1], reverse=True)[1:15]
     items = [pivot_table.index[i[0]] for i in similar_item]
+    logger.info(f"Recommendation for magazine id: {magazine_id} -> {','.join(items)}")
     return get_magazine_by_ids(items)
