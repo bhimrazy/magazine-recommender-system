@@ -1,6 +1,6 @@
-# Vannila Python App
+# MAGAZINE RECOMMENDER SYSTEM
 
-This is a python app starter repository.
+MAGAZINE RECOMMENDER SYSTEM.
 Follow these commands to run the project.
 
 ## Setup
