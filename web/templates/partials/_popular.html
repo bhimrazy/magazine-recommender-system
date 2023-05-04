@@ -1,0 +1,13 @@
+<!-- popular -->
+<section class="flex flex-col">
+    <h2 class="font-normal text-2xl uppercase text-cyan-800 py-6">{{title}}</h2>
+    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-8">
+        {% for item in magazines %}
+
+        {% with item=item %}
+        {% include "partials/components/_card.html" %}
+        {% endwith %}
+
+        {% endfor %}
+    </ul>
+</section>

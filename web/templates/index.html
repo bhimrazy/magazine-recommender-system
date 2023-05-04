@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magazine Recommender System | AI Fellowship </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <meta name="title" content="Magazine Recommender System | AI Fellowship">
+    <meta name="description" content="Magazine Recommender System | AI Fellowship">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://recsys-project-fuseai-production.up.railway.app/">
+    <meta property="og:title" content="Magazine Recommender System | AI Fellowship">
+    <meta property="og:description" content="Magazine Recommender System | AI Fellowship">
+    <meta property="og:image"
+        content="https://recsys-project-fuseai-production.up.railway.app/static/images/landing-page.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://academy-bhimraj-com-np.vercel.app">
+    <meta property="twitter:title" content="Magazine Recommender System | AI Fellowship">
+    <meta property="twitter:description" content="Magazine Recommender System | AI Fellowship">
+    <meta property="twitter:image"
+        content="https://recsys-project-fuseai-production.up.railway.app/static/images/landing-page.png">
+    <link rel="canonical" href="/">
+    <link rel="icon" type="image/png" href="{{ url_for('static', path='/icons/icon.png') }}" />
+</head>
+
+<body class="min-h-screen bg-orange-50 flex flex-col" style="font-family: 'Outfit', sans-serif;">
+
+    <!-- header -->
+    {% include 'partials/_header.html' %}
+
+    <main class="flex flex-col max-w-7xl mx-auto w-full p-4">
+        <!-- popular magazines -->
+
+        {% with magazines=data, title="Most Popular" %}
+        {% include "partials/_popular.html" %}
+        {% endwith %}
+
+        <div class="flex flex-col space-y-4 py-10">
+
+            <!-- popular categories -->
+            {% for item in category %}
+
+            {% with magazines=item[1], title=item[0] %}
+            {% include "partials/_popular.html" %}
+            {% endwith %}
+
+            {% endfor %}
+        </div>
+
+    </main>
+
+    <!-- footer -->
+</body>
+
+</html>
