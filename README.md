@@ -19,6 +19,7 @@ This project implements a magazine recommender system using [Amazon review data 
   - [Future Work](#future-work)
   - [Contributing](#contributing)
   - [License](#license)
+  - [Authors](#authors)
 
 ## Introduction
 
