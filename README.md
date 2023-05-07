@@ -71,8 +71,13 @@ The Amazon review data was preprocessed as follows:
 
 1. Filtered the data to only include reviews for magazines.
 2. Removed duplicate reviews.
-3. Tokenized the review text and removed stop words.
-4. Used the TF-IDF algorithm to calculate the similarity scores between magazines.
+3. Filtering Magazines and users
+  - Selecting users who have rated at least 5 magazines
+  - Selecting Magazines which have at least 10 reviews/ratings.
+  
+![image](https://user-images.githubusercontent.com/46085301/236679234-3e9c8a44-a9df-4132-954e-7edb17a26197.png)
+![image](https://user-images.githubusercontent.com/46085301/236679305-269a2866-90e1-40e9-9079-2efd0f03da3c.png)
+![image](https://user-images.githubusercontent.com/46085301/236679318-ab29951c-7349-4fe6-9441-f803da7b843a.png)
 
 ## Recommendation Algorithm
 
@@ -81,6 +86,7 @@ The recommender system uses the cosine similarity metric to calculate the simila
 ## Web Interface
 
 The web interface was implemented using FastAPI and Tailwind CSS. The user can enter their ratings for magazines and receive recommendations for similar magazines. The recommendations are updated dynamically as the user enters their ratings.
+![image](https://user-images.githubusercontent.com/46085301/236679105-5f207f9a-1a02-4e6c-9172-a9e857a57571.png)
 
 ## Future Work
 
